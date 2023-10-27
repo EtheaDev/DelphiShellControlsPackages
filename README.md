@@ -33,7 +33,7 @@ A simple demo that explain the use of those components is located under:
 
 ## Release Notes
 
-22 Oct 2023: ver. 1.1.0
+27 Oct 2023: ver. 1.1.0
 - Added packages of ShellControls for Delphi 12
 
 26 May 2023: ver. 1.0.0
