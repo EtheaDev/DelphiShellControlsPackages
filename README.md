@@ -1,12 +1,16 @@
 ﻿# Shell Controls Packages and Utils [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**Latest Version 1.1.0 - 27 Oct 2023**
+**Latest Version 1.1.1 - 08 Jun 2024**
 
 ** Packages, demo and Utility of Delphi ShellControl Components (missing by Embarcadero)
 
 Delphi version supported: XE6, XE8, XE10, D10.1, D10.2, D10.3, D10.4, D11, D12
 
-### Components
+For other versions, please add a request in the [Issue section](https://github.com/EtheaDev/DelphiShellControlsPackages/issues) of the project.
+
+![Supporting Delphi 12](./Images/SupportingDelphi.jpg)
+
+## Components
 Vcl.Shell.ShellCtrls.pas and Vcl.Shell.ShellConsts.pas are not distributed here, because they are distributed by Embarcadero inside Delphi!
 
 ## Installation Notes
@@ -33,6 +37,9 @@ A simple demo that explain the use of those components is located under:
 
 ## Release Notes
 
+08 Jun 2024: ver. 1.1.1
+- Updated packages of ShellControls for Delphi 12.1
+
 27 Oct 2023: ver. 1.1.0
 - Added packages of ShellControls for Delphi 12
 
@@ -43,7 +50,7 @@ A simple demo that explain the use of those components is located under:
 
 ## License
 
-Licensed under the [Apache License, Version 2.0][9] (the "License");
+Licensed under the [Apache License, Version 2.0] (the "License");
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 Original Copyright (c) 1995-2010 Embarcadero Technologies, Inc.
