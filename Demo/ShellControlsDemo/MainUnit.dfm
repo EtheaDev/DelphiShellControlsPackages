@@ -222,13 +222,14 @@ object MainForm: TMainForm
           Height = 44
           Align = alClient
           Caption = 'View Style'
-          Columns = 4
+          Columns = 5
           ItemIndex = 0
           Items.Strings = (
             'Icon'
+            'SmallIcon'
             'List'
             'Report'
-            'SmallIcon')
+            'Tile')
           TabOrder = 1
           OnClick = ViewStyleClick
         end
