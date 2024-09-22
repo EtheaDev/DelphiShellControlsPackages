@@ -72,13 +72,24 @@ uses
   Winapi.CommCtrl
   , Winapi.ShlObj
   , Vcl.Shell.Utils
+  , System.TypInfo
   ;
 
 type
   TNTFolders = (rfCommonDesktopDirectory, rfCommonPrograms, rfCommonStartMenu, rfCommonStartup);
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  I: TViewStyle;
+  LViewStyleName: string;
 begin
+  for I := Low(TViewStyle) to High(TViewStyle) do
+  begin
+    LViewStyleName := GetEnumName(TypeInfo(TViewStyle), Ord(I));
+    ViewStyle.Items.Add(LViewStyleName);
+  end;
+  ViewStyle.ItemIndex := 0;
+
   Caption := Application.Title;
   ClearFileInfo;
   InitImageListIcons;

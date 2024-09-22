@@ -1,6 +1,6 @@
 ﻿# Shell Controls Packages and Utils [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**Latest Version 1.1.1 - 08 Jun 2024**
+**Latest Version 1.1.2 - 22 Sep 2024**
 
 ** Packages, demo and Utility of Delphi ShellControl Components (missing by Embarcadero)
 
@@ -36,6 +36,9 @@ A simple demo that explain the use of those components is located under:
 
 
 ## Release Notes
+
+22 Sep 2024: ver. 1.1.2
+- Fixed option list for ListView in Demo.
 
 08 Jun 2024: ver. 1.1.1
 - Updated packages of ShellControls for Delphi 12.1

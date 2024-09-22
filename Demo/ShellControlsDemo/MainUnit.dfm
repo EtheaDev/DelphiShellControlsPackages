@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 114
   Caption = 'Shell Controls Demo'
   ClientHeight = 571
-  ClientWidth = 853
+  ClientWidth = 899
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object MainForm: TMainForm
   object ClientPanel: TPanel
     Left = 0
     Top = 0
-    Width = 853
+    Width = 899
     Height = 571
     Align = alClient
     BevelOuter = bvNone
@@ -81,12 +81,12 @@ object MainForm: TMainForm
     object CenterPanel: TPanel
       Left = 197
       Top = 0
-      Width = 656
+      Width = 702
       Height = 571
       Align = alClient
       TabOrder = 1
       object RightSplitter: TSplitter
-        Left = 508
+        Left = 554
         Top = 47
         Width = 4
         Height = 504
@@ -99,7 +99,7 @@ object MainForm: TMainForm
         AlignWithMargins = True
         Left = 4
         Top = 50
-        Width = 501
+        Width = 547
         Height = 498
         ObjectTypes = [otFolders, otNonFolders]
         Root = 'rfDesktop'
@@ -116,7 +116,7 @@ object MainForm: TMainForm
         TabOrder = 0
       end
       object FileInfo: TPanel
-        Left = 512
+        Left = 558
         Top = 47
         Width = 143
         Height = 504
@@ -169,7 +169,7 @@ object MainForm: TMainForm
       object StatusBar: TStatusBar
         Left = 1
         Top = 551
-        Width = 654
+        Width = 700
         Height = 19
         Panels = <>
         SimplePanel = True
@@ -177,7 +177,7 @@ object MainForm: TMainForm
       object TopPanel: TPanel
         Left = 1
         Top = 1
-        Width = 654
+        Width = 700
         Height = 46
         Align = alTop
         TabOrder = 3
@@ -218,17 +218,11 @@ object MainForm: TMainForm
         object ViewStyle: TRadioGroup
           Left = 145
           Top = 1
-          Width = 508
+          Width = 554
           Height = 44
           Align = alClient
           Caption = 'View Style'
-          Columns = 4
-          ItemIndex = 0
-          Items.Strings = (
-            'Icon'
-            'List'
-            'Report'
-            'SmallIcon')
+          Columns = 5
           TabOrder = 1
           OnClick = ViewStyleClick
         end
