@@ -1,6 +1,6 @@
 ﻿# Shell Controls Packages and Utils [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**Latest Version 1.1.3 - 29 Aug 2025**
+**Latest Version 1.1.4 - 29 Jun 2026**
 
 ** Packages, demo and Utility of Delphi ShellControl Components (missing by Embarcadero)
 
@@ -36,6 +36,9 @@ A simple demo that explain the use of those components is located under:
 
 
 ## Release Notes
+29 Jun 2026: ver. 1.1.4
+- Added support for Delphi 13.1
+
 29 Aug 2025: ver. 1.1.3
 - Fixed Demo
 - Added support for Delphi 13

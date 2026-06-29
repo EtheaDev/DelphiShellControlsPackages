@@ -15,11 +15,6 @@
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
-        <Base_Win32>true</Base_Win32>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
@@ -43,7 +38,7 @@
         <VerInfo_MajorVer>15</VerInfo_MajorVer>
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DesignOnlyPackage>true</DesignOnlyPackage>
-        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_Optimize>true</DCC_Optimize>
         <DCC_Description>Shell Control Property and Component Editors</DCC_Description>
         <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
         <GenDll>true</GenDll>
@@ -51,6 +46,7 @@
         <DllSuffix>260</DllSuffix>
         <SanitizedProjectName>dclshlctrls</SanitizedProjectName>
         <DCC_DcuOutput>..\..\Lib\Delphi10_3\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_UsePackage>vclshlctrls;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <Version>7.0</Version>
@@ -59,11 +55,6 @@
         <DCC_Optimize>True</DCC_Optimize>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <Version>7.0</Version>
-        <DCC_Optimize>False</DCC_Optimize>
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

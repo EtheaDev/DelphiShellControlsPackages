@@ -24,7 +24,7 @@ package dclshlctrls;
 {$LOCALSYMBOLS OFF}
 {$LONGSTRINGS ON}
 {$OPENSTRINGS ON}
-{$OPTIMIZATION OFF}
+{$OPTIMIZATION ON}
 {$OVERFLOWCHECKS OFF}
 {$RANGECHECKS OFF}
 {$REFERENCEINFO OFF}
@@ -43,10 +43,7 @@ package dclshlctrls;
 {$IMPLICITBUILD OFF}
 
 requires
-  rtl,
-  Vcl,
   designide,
-  Vclx,
   vclshlctrls;
 
 contains
