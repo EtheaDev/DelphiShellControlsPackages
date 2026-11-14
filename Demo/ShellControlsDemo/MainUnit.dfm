@@ -121,6 +121,8 @@ object MainForm: TMainForm
         Width = 143
         Height = 504
         Align = alRight
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 1
         object PaintBox: TPaintBox
           AlignWithMargins = True
@@ -180,6 +182,8 @@ object MainForm: TMainForm
         Width = 700
         Height = 46
         Align = alTop
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 3
         object ToolBar: TToolBar
           Left = 1
@@ -582,9 +586,16 @@ object MainForm: TMainForm
   object ShellChangeNotifier: TShellChangeNotifier
     NotifyFilters = [nfFileNameChange, nfDirNameChange]
     Root = 'C:\'
-    WatchSubTree = True
+    WatchSubTree = False
     OnChange = ShellChangeNotifierChange
     Left = 752
     Top = 232
+  end
+  object RefreshTimer: TTimer
+    Enabled = False
+    Interval = 400
+    OnTimer = RefreshTimerTimer
+    Left = 752
+    Top = 176
   end
 end

@@ -1,6 +1,10 @@
-﻿# Shell Controls Packages and Utils [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+﻿# Shell Controls Packages and Utils 
 
-**Latest Version 1.1.4 - 29 Jun 2026**
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Latest release](https://img.shields.io/github/v/release/EtheaDev/DelphiShellControlsPackages?label=Latest%20release&color=brightgreen)](https://github.com/EtheaDev/KittoX/releases/latest)
+[![Delphi XE6+](https://img.shields.io/badge/Delphi-XE6%2B-e62329.svg)](https://www.embarcadero.com/products/delphi)
+[![Platform: VCL](https://img.shields.io/badge/Platform-VCL-8a2be2.svg)](https://docwiki.embarcadero.com/RADStudio/en/Main_Page)
+[![Windows 10 and 11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078d6.svg)](https://www.microsoft.com/windows)
 
 ** Packages, demo and Utility of Delphi ShellControl Components (missing by Embarcadero)
 
@@ -36,6 +40,10 @@ A simple demo that explain the use of those components is located under:
 
 
 ## Release Notes
+14 Nov 2026: ver. 1.1.5
+- Added support for Delphi 13.2
+- Flickering issues within the demo have been resolved
+
 29 Jun 2026: ver. 1.1.4
 - Added support for Delphi 13.1
 

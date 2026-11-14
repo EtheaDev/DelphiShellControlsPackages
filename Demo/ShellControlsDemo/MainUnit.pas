@@ -45,6 +45,7 @@ type
     Refresh1: TMenuItem;
     Sorted1: TMenuItem;
     ShellChangeNotifier: TShellChangeNotifier;
+    RefreshTimer: TTimer;
     procedure ViewStyleClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnBackUpdate(Sender: TObject);
@@ -57,9 +58,15 @@ type
       Change: TItemChange);
     procedure ShellListViewExit(Sender: TObject);
     procedure ShellChangeNotifierChange;
+    procedure RefreshTimerTimer(Sender: TObject);
   private
+    FRefreshing: Boolean;
+    FWatchedPath: string;
     procedure InitImageListIcons;
     procedure ClearFileInfo;
+    procedure EnableNativeDoubleBuffer;
+    procedure SyncNotifierRoot;
+    procedure RefreshListKeepSelection;
   end;
 
 var
@@ -97,6 +104,82 @@ begin
   DisplayNameLabel.Font.Height := Round(Self.Font.Height * 1.6);
   DisplayNameLabel.Font.Style := [TFontStyle.fsBold];
   PathLabel.Font.Height := Round(Self.Font.Height * 1.2);
+  EnableNativeDoubleBuffer;
+end;
+
+const
+  //Defined here because older CommCtrl units may not have them
+  LVS_EX_DOUBLEBUFFER_ = $00010000;
+  TVS_EX_DOUBLEBUFFER_ = $0004;
+  TVM_SETEXTENDEDSTYLE_ = TV_FIRST + 44;
+
+procedure TMainForm.EnableNativeDoubleBuffer;
+begin
+  //Let Windows itself paint the list and the tree off-screen (no flicker,
+  //no VCL DoubleBuffered side effects on common controls)
+  SendMessage(ShellListView.Handle, LVM_SETEXTENDEDLISTVIEWSTYLE,
+    LVS_EX_DOUBLEBUFFER_, LVS_EX_DOUBLEBUFFER_);
+  SendMessage(ShellTreeView.Handle, TVM_SETEXTENDEDSTYLE_,
+    TVS_EX_DOUBLEBUFFER_, TVS_EX_DOUBLEBUFFER_);
+end;
+
+procedure TMainForm.SyncNotifierRoot;
+var
+  LFolder: TShellFolder;
+  LPath: string;
+begin
+  //Watch only the folder that is shown, not the whole C:\ drive
+  LPath := '';
+  LFolder := ShellTreeView.SelectedFolder;
+  if Assigned(LFolder) then
+    LPath := LFolder.PathName;
+  if (LPath <> '') and not DirectoryExists(LPath) then
+    LPath := ''; //virtual folder (This PC, Network...) - nothing to watch
+  if SameText(LPath, FWatchedPath) then
+    Exit;
+  FWatchedPath := LPath;
+  RefreshTimer.Enabled := False;
+  if FWatchedPath <> '' then
+    ShellChangeNotifier.Root := FWatchedPath;
+end;
+
+procedure TMainForm.RefreshListKeepSelection;
+var
+  LSelName: string;
+  I: Integer;
+begin
+  if FRefreshing then
+    Exit;
+  FRefreshing := True;
+  try
+    LSelName := '';
+    if Assigned(ShellListView.Selected) then
+      LSelName := ShellListView.Selected.Caption;
+    ShellListView.Items.BeginUpdate;
+    try
+      ShellListView.Refresh;
+    finally
+      ShellListView.Items.EndUpdate;
+    end;
+    EnableNativeDoubleBuffer;
+    if LSelName <> '' then
+      for I := 0 to ShellListView.Items.Count - 1 do
+        if SameText(ShellListView.Items[I].Caption, LSelName) then
+        begin
+          ShellListView.Items[I].Selected := True;
+          ShellListView.Items[I].Focused := True;
+          ShellListView.Items[I].MakeVisible(False);
+          Break;
+        end;
+  finally
+    FRefreshing := False;
+  end;
+end;
+
+procedure TMainForm.RefreshTimerTimer(Sender: TObject);
+begin
+  RefreshTimer.Enabled := False;
+  RefreshListKeepSelection;
 end;
 
 procedure TMainForm.InitImageListIcons;
@@ -106,7 +189,11 @@ end;
 
 procedure TMainForm.ShellChangeNotifierChange;
 begin
-  actnRefresh.Execute;
+  //Many file events arrive in bursts: wait until they stop, then refresh once
+  if FWatchedPath = '' then
+    Exit;
+  RefreshTimer.Enabled := False;
+  RefreshTimer.Enabled := True;
 end;
 
 procedure TMainForm.ShellListViewChange(Sender: TObject; Item: TListItem;
@@ -117,6 +204,10 @@ var
   LCreation, LChanged: TDateTime;
   LFolder: TShellFolder;
 begin
+  //OnChange fires for every item (text, image, state) while the list is filled;
+  //only a selection change is interesting here
+  if FRefreshing or (Change <> ctState) then
+    Exit;
   LFolder := ShellListView.SelectedFolder;
   if Assigned(LFolder) then
   begin
@@ -182,12 +273,15 @@ end;
 procedure TMainForm.ViewStyleClick(Sender: TObject);
 begin
   ShellListView.ViewStyle := TViewStyle(ViewStyle.ItemIndex);
+  EnableNativeDoubleBuffer;
 end;
 
 procedure TMainForm.actnBackUpdate(Sender: TObject);
 begin
   actnBack.Enabled := (ShellTreeView.SelectedFolder <> nil) and
     (ShellTreeView.SelectedFolder.Level > 0);
+  //Runs on idle: keep the change notifier on the folder being shown
+  SyncNotifierRoot;
 end;
 
 procedure TMainForm.actnBackExecute(Sender: TObject);
@@ -197,7 +291,8 @@ end;
 
 procedure TMainForm.actnRefreshExecute(Sender: TObject);
 begin
-    ShellListView.Refresh();
+  RefreshTimer.Enabled := False;
+  RefreshListKeepSelection;
 end;
 
 procedure TMainForm.actnSortedUpdate(Sender: TObject);
